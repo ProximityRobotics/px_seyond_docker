@@ -32,7 +32,8 @@ RUN pip install     \
     pillow          \
     scikit-learn    \
     pandas          \
-    numpy==1.24.4   
+    numpy==1.24.4   \
+    filterpy        
 
 ##############################################################################
 ##                                 Create User                              ##
