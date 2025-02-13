@@ -42,9 +42,11 @@ ARG USER=docker
 ARG PASSWORD=docker
 ARG UID=1000
 ARG GID=1000
+ARG DOMAIN_ID=0
 ENV UID=$UID
 ENV GID=$GID
 ENV USER=$USER
+ENV ROS_DOMAIN_ID=${DOMAIN_ID}
 RUN groupadd -g "$GID" "$USER"  && \
     useradd -m -u "$UID" -g "$GID" --shell $(which bash) "$USER" -G sudo && \
     echo "$USER:$PASSWORD" | chpasswd && \
@@ -54,6 +56,7 @@ RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /etc/bash.bashrc
 COPY config/dds_profile.xml /home/$USER
 RUN chown $USER:$USER /home/$USER/dds_profile.xml
 ENV FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/dds_profile.xml
+RUN echo "export ROS_DOMAIN_ID=${DOMAIN_ID}" >> /etc/bash.bashrc
 
 USER $USER 
 RUN mkdir -p /home/$USER/ros2_ws/src
