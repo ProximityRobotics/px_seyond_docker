@@ -12,7 +12,6 @@ docker run --name seyond_driver \
     -v ~/.Xauthority:/home/docker/.Xauthority \
     -v /dev:/dev \
     -v $PWD/data:/home/docker/data \
-    -v $PWD/src:/home/docker/ros2_ws/src \
     --net host \
     --rm \
     --ipc host \

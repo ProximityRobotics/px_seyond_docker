@@ -1,7 +1,12 @@
 # Seyond driver
 
-You need to include the driver binaries manually in the ```seyond_driver``` folder.
-You can add external packages in a ```src``` folder, which will be ignored from git.
+This docker pulls and builds the latest [seyond_ros_driver](https://github.com/Seyond-Inc/seyond_ros_driver) from GitHub.
+
+The LiDAR needs to be connected to your PC via Ethernet and you need to set your IP settings as following:
+
+Address: ```172.168.1.42```
+
+Netmask: ```255.255.0.0```
 
 ## Build image
 
@@ -17,6 +22,4 @@ You can add external packages in a ```src``` folder, which will be ignored from 
 
 ## Run the driver
 
-```bash
-ros2 run seyond seyond_node
-```
+The driver should start automatically using the ```start.py``` launch file.

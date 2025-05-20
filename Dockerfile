@@ -28,13 +28,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     ros-$ROS_DISTRO-foxglove-bridge \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN pip install     \
-    pillow          \
-    scikit-learn    \
-    pandas          \
-    numpy==1.24.4   \
-    filterpy        
-
 ##############################################################################
 ##                                 Create User                              ##
 ##############################################################################
@@ -64,22 +57,13 @@ RUN mkdir -p /home/$USER/ros2_ws/src
 ##############################################################################
 ##                                 User Dependecies                         ##
 ##############################################################################
-WORKDIR /home/$USER
-COPY seyond_driver/seyond-ros2-humble-3.102.0-rv3.5.2pre-x86-public.deb /home/$USER
-RUN sudo dpkg -i seyond-ros2-humble-3.102.0-rv3.5.2pre-x86-public.deb
+WORKDIR /home/$USER/ros2_ws/src
 
-COPY src /home/$USER/ros2_ws/src
-
-####### Innovusion SDK is out of date and will not be installed #######
-# WORKDIR /home/$USER/ros2_ws/src
-# COPY seyond_driver/inno_lidar_ros inno_lidar_ros/.
-
-# ARG CLIENT_SDK_PATH=/home/$USER/ros2_ws/src/inno_lidar_ros/src/inno_sdk
-# ENV CLIENT_SDK_PATH=$CLIENT_SDK_PATH
-# WORKDIR ${CLIENT_SDK_PATH}/build
-# RUN shared=1 sudo ./build_unix.sh && \
-#     echo "build status: $?"
-##############################################
+# Install seyond_ros_driver
+RUN git clone https://github.com/Seyond-Inc/seyond_ros_driver.git
+WORKDIR /home/$USER/ros2_ws/src/seyond_ros_driver
+RUN git submodule update --init
+RUN ./build.bash
 
 ##############################################################################
 ##                                 Build ROS and run                        ##
@@ -96,4 +80,4 @@ RUN sudo sed --in-place --expression \
     '$isource "/home/$USER/ros2_ws/install/setup.bash"' \
     /ros_entrypoint.sh
 
-CMD ["bash"]
+CMD ["ros2", "launch", "seyond", "start.py"]
