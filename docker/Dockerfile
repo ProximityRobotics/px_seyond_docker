@@ -1,3 +1,18 @@
+#    Copyright 2026 Proximity Robotics & Automation GmbH
+
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+
+#        http://www.apache.org/licenses/LICENSE-2.0
+
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+
+
 ##############################################################################
 ##                                 Base Image                               ##
 ##############################################################################
@@ -31,8 +46,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 ##############################################################################
 ##                                 Create User                              ##
 ##############################################################################
-ARG USER=docker
-ARG PASSWORD=docker
+ARG USER=robot
+ARG PASSWORD=robot
 ARG UID=1000
 ARG GID=1000
 ARG DOMAIN_ID=0
@@ -46,9 +61,9 @@ RUN groupadd -g "$GID" "$USER"  && \
     echo "%sudo ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/sudogrp
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /etc/bash.bashrc
 
-COPY config/dds_profile.xml /home/$USER
-RUN chown $USER:$USER /home/$USER/dds_profile.xml
-ENV FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/dds_profile.xml
+COPY env/fast_dds_1.xml /home/$USER
+RUN chown $USER:$USER /home/$USER/fast_dds_1.xml
+ENV FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/fast_dds_1.xml
 RUN echo "export ROS_DOMAIN_ID=${DOMAIN_ID}" >> /etc/bash.bashrc
 
 USER $USER 
