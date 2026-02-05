@@ -22,7 +22,7 @@ GREEN_BOLD="\033[1;32m"
 RESET="\033[0m"
 
 PACKAGE_NAME="seyond_driver"
-ROS_DISTRO="humble"
+ROS_DISTRO="jazzy"
 
 # Set Package root
 if [[ "$(pwd)" == *"/$PACKAGE_NAME/"* ]]; then

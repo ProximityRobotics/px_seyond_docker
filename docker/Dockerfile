@@ -16,7 +16,7 @@
 ##############################################################################
 ##                                 Base Image                               ##
 ##############################################################################
-ARG ROS_DISTRO=humble
+ARG ROS_DISTRO=jazzy
 FROM ros:$ROS_DISTRO-ros-base
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -32,7 +32,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     wget \
     python3-colcon-common-extensions \
     libpcl-dev \
-    libpcl-conversions-dev \
     libpcap-dev \
     ros-$ROS_DISTRO-pcl* \
     ros-$ROS_DISTRO-rviz2 \
