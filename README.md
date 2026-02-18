@@ -1,6 +1,6 @@
-# Seyond driver
+# pxSeyondDocker
 
-This docker pulls and builds the latest [seyond_ros_driver](https://github.com/Seyond-Inc/seyond_ros_driver) from GitHub.
+This docker pulls and builds the latest [seyond_ros_driver](https://github.com/Seyond-Inc/seyond_ros_driver) from GitHub and runs it in a ROS 2 Humble environment.
 
 The LiDAR needs to be connected to your PC via Ethernet and you need to set your IP settings as following:
 
@@ -13,7 +13,7 @@ Netmask: ```255.255.0.0```
 clone the seyond_driver repo
 
 ```bash
-git clone <repo>
+git clone -b humble <repo>
 ```
 
 build the docker image
