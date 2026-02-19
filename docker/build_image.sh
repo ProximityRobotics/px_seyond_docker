@@ -22,7 +22,7 @@ YELLOW_BOLD="\033[1;33m"
 GREEN_BOLD="\033[1;32m"
 RESET="\033[0m"
 
-PACKAGE_NAME="seyond_driver"
+PACKAGE_NAME="px_seyond_docker"
 ROS_DISTRO="humble"
 
 # Set Package root
