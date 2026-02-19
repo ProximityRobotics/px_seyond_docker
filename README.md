@@ -10,7 +10,7 @@ Netmask: ```255.255.0.0```
 
 ## How to use
 
-clone the seyond_driver repo
+clone the px_seyond_docker repo
 
 ```bash
 git clone <repo>
